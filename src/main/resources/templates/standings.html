@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>League Standings</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f1f3f5;
+            margin: 0;
+            padding: 40px;
+            color: #212529;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #343a40;
+        }
+
+        .division-header {
+            font-size: 1.25em;
+            font-weight: bold;
+            margin: 30px 0 10px;
+            padding-left: 5px;
+            color: #495057;
+            border-left: 5px solid #495057;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        thead {
+            background-color: #343a40;
+            color: white;
+        }
+
+        th {
+            padding: 12px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            background-color: #343a40;
+            z-index: 2;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            td {
+                padding: 12px;
+                text-align: right;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                font-weight: bold;
+                color: #495057;
+            }
+
+            .division-header {
+                font-size: 1.1em;
+                margin-top: 20px;
+            }
+        }
+
+        th.divider-right, td.divider-right {
+            border-right: 2px solid #adb5bd;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div style="text-align: center; margin-bottom: 20px;">
+    <img src="/images/NFL.png" alt="League Logo" style="max-height: 120px;">
+</div>
+
+<h1>National Foodball League Standings</h1>
+
+<div th:each="entry : ${groupedStandings}">
+    <div class="division-header" th:text="${entry.key}">Division</div>
+
+    <table>
+        <thead>
+        <tr>
+            <th class="divider-right">Team</th>
+            <th>W</th>
+            <th>L</th>
+            <th>T</th>
+            <th class="divider-right">PCT</th>
+
+            <th>PF</th>
+            <th>PA</th>
+            <th class="divider-right">NET</th>
+
+            <th>Div WLT</th>
+            <th class="divider-right">Div %</th>
+
+            <th>Streak</th>
+            <th>Last 2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${entry.value}">
+            <td class="divider-right" th:text="${s.name}">Team</td>
+            <td th:text="${s.w}">0</td>
+            <td th:text="${s.l}">0</td>
+            <td th:text="${s.t}">0</td>
+            <td class="divider-right" th:text="${s.pct}">.000</td>
+
+            <td th:text="${s.pf}">0</td>
+            <td th:text="${s.pa}">0</td>
+            <td class="divider-right" th:text="${s.net}">0</td>
+
+            <td th:text="${s.div_wlt}">0-0-0</td>
+            <td class="divider-right" th:text="${s.div_pct}">.000</td>
+
+            <td th:text="${s.strk}">W0</td>
+            <td th:text="${s.last2}">0-0</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
