@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ public class StandingController {
         this.repo = repo;
     }
 
-    @GetMapping("/standings")
+    @GetMapping("/")
     public String showStandings(Model model) {
         List<StandingClass> standings = repo.getAllFromView();
 
