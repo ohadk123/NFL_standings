@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.standings;
 
 public class StandingClass {
     private String division;
