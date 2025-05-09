@@ -13,9 +13,9 @@ public class StandingRepository {
         this.jdbc = jdbc;
     }
 
-    public List<StandingClass> getAllFromView() {
+    public List<StandingRecord> getAllFromView() {
         return jdbc.query("SELECT * FROM standings", (rs, rowNum) ->
-                new StandingClass(
+                new StandingRecord(
                         rs.getString("division"),
                         rs.getString("Team"),
                         rs.getInt("W"),

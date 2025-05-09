@@ -21,10 +21,10 @@ public class StandingController {
     @GetMapping
     public String showStandings(Model model) {
 
-        List<StandingClass> standings = repo.getAllFromView();
+        List<StandingRecord> standings = repo.getAllFromView();
 
-        Map<String, List<StandingClass>> grouped = standings.stream()
-                        .collect(Collectors.groupingBy(StandingClass::getDivision));
+        Map<String, List<StandingRecord>> grouped = standings.stream()
+                        .collect(Collectors.groupingBy(StandingRecord::division));
 
         model.addAttribute("groupedStandings", grouped);
         return "standings";
