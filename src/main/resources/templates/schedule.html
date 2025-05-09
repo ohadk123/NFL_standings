@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
   <meta charset="UTF-8">
   <title>Schedule - National Foodball League</title>
-  <link rel="stylesheet" href="/styles.css">
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
       background-color: #f9f9f9;
       margin: 2rem;
-      direction: rtl;
     }
 
     h1 {
@@ -42,39 +40,66 @@
       padding: 0;
     }
 
-    li {
-      padding: 0.5rem 0;
-      border-bottom: 1px dashed #ddd;
-    }
-
     li:last-child {
       border-bottom: none;
     }
 
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed #ddd;
+      font-size: 1.1rem;
+    }
+
     .team {
+      flex: 1;
       font-weight: bold;
       color: #2d3436;
+      text-align: center;
     }
 
     .vs {
-      color: #888;
+      width: 50px;
+      text-align: center;
+      font-size: 1.3rem;
+      color: #e67e22;
+      font-weight: bold;
     }
+
+    .record {
+      width: 60px;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      text-align: center;
+      font-family: monospace;
+    }
+
   </style>
 </head>
 <body>
-<h1>📅 לוח משחקים - National Foodball League 🏈</h1>
+
+<div style="text-align: center; margin-bottom: 20px;">
+  <img src="/images/NFL.png" alt="League Logo" style="max-height: 120px;">
+</div>
+
+<h1>National Foodball League Schedule</h1>
 
 <div th:each="weekEntry : ${groupedSchedule}">
-  <h2>שבוע <span th:text="${weekEntry.key}">X</span></h2>
+  <h2>week <span th:text="${weekEntry.key}">X</span></h2>
 
   <div th:each="dayEntry : ${weekEntry.value}" class="day-schedule">
     <h3>🍽️ <span th:text="${dayEntry.key}">יום</span></h3>
 
     <ul>
       <li th:each="game : ${dayEntry.value}">
-        <span class="team" th:text="${game.name_home}">Team A</span>
-        <span class="vs"> נגד </span>
-        <span class="team" th:text="${game.name_away}">Team B</span>
+        <span class="record" th:text="${game.recordHome}">0-0-0</span>
+        <span class="team" th:text="${game.nameHome}">Team A</span>
+        <span class="vs"> 🆚 </span>
+        <span class="team" th:text="${game.nameAway}">Team B</span>
+        <span class="record" th:text="${game.recordAway}">0-0-0</span>
       </li>
     </ul>
   </div>

@@ -13,11 +13,13 @@ public class ScheduleRepository {
         this.jdbc = jdbc;
     }
 
-    public List<Schedule> getAllFromView() {
+    public List<ScheduleRecord> getAllFromView() {
         return jdbc.query("SELECT * FROM schedule", (rs, rowNum) ->
-                new Schedule(
+                new ScheduleRecord(
                         rs.getString("name_home"),
+                        rs.getString("record_home"),
                         rs.getString("name_away"),
+                        rs.getString("record_away"),
                         rs.getInt("week"),
                         rs.getString("day")
                 )

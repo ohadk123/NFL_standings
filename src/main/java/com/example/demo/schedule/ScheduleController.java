@@ -5,10 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Controller
@@ -21,21 +20,24 @@ public class ScheduleController {
         this.repo = repo;
     }
 
-    private static final List<String> dayOrder = List.of("Thursday", "Sunday", "Monday");
-
     @GetMapping
     public String showSchedule(Model model) {
-        List<Schedule> scheduleList = repo.getAllFromView();
-        // Map<String, Map<String, List<Person>>> peopleByStateAndCity
-        // = personStream.collect(Collectors.groupingBy(Person::getState,
-        //                                              Collectors.groupingBy(Person::getCity)));
-        Map<Integer, Map<String, List<Schedule>>> grouped = scheduleList.stream()
+        List<ScheduleRecord> scheduleRecordList = repo.getAllFromView();
+
+        Map<Integer, Map<String, List<ScheduleRecord>>> grouped = scheduleRecordList.stream()
                 .collect(Collectors.groupingBy(
-                        Schedule::getWeek,
-                        Collectors.groupingBy(Schedule::getDay)
+                        ScheduleRecord::week,
+                        Collectors.groupingBy(
+                                ScheduleRecord::day,
+                                LinkedHashMap::new,
+                                Collectors.toList()
+                            )
                 )
         );
         model.addAttribute("groupedSchedule", grouped);
+
+
+
         return "schedule";
     }
 }
