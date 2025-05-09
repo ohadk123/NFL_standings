@@ -4,30 +4,8 @@
     <meta charset="UTF-8">
     <title>League Standings</title>
     <link rel="icon" href="/images/NFL.png" type="image/png">
+    <link rel="stylesheet" href="/styles/global.css">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f1f3f5;
-            margin: 0;
-            padding: 40px;
-            color: #212529;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #343a40;
-        }
-
-        .division-header {
-            font-size: 1.25em;
-            font-weight: bold;
-            margin: 30px 0 10px;
-            padding-left: 5px;
-            color: #495057;
-            border-left: 5px solid #495057;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -38,18 +16,8 @@
             margin-bottom: 30px;
         }
 
-        thead {
-            background-color: #343a40;
-            color: white;
-        }
-
         th {
             padding: 12px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            background-color: #343a40;
-            z-index: 2;
         }
 
         td {
@@ -84,17 +52,11 @@
                 font-weight: bold;
                 color: #495057;
             }
-
-            .division-header {
-                font-size: 1.1em;
-                margin-top: 20px;
-            }
         }
 
         th.divider-right, td.divider-right {
             border-right: 2px solid #adb5bd;
         }
-
     </style>
 
 </head>
@@ -103,14 +65,19 @@
 <div style="text-align: center; margin-bottom: 20px;">
     <img src="/images/NFL.png" alt="League Logo" style="max-height: 120px;">
 </div>
+<h1>National Foodball League</h1>
+<h1>Standings</h1>
 
-<h1>National Foodball League Standings</h1>
+
+<div style="text-align: center; margin-bottom: 40px;">
+    <a href="/schedule" class="direct-button">📅 View Schedule</a>
+</div>
 
 <div th:each="entry : ${groupedStandings}">
-    <div class="division-header" th:text="${entry.key}">Division</div>
+    <div class="table-name" th:text="${entry.key}">Division</div>
 
     <table>
-        <thead>
+        <thead class="table-header">
         <tr>
             <th class="divider-right">Team</th>
             <th>W</th>

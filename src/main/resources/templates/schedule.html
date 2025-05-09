@@ -2,25 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
   <meta charset="UTF-8">
-  <title>Schedule - National Foodball League</title>
+  <title>League Schedule</title>
+  <link rel="icon" href="/images/NFL.png" type="image/png">
+  <link rel="stylesheet" href="/styles/global.css">
   <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background-color: #f9f9f9;
-      margin: 2rem;
-    }
-
-    h1 {
-      text-align: center;
-      color: #2c3e50;
-    }
-
-    h2 {
-      margin-top: 2rem;
-      color: #34495e;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.3rem;
-    }
 
     h3 {
       color: #7f8c8d;
@@ -30,7 +15,6 @@
     .day-schedule {
       background: white;
       border-radius: 10px;
-      padding: 1rem;
       margin-bottom: 1rem;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     }
@@ -84,14 +68,18 @@
 <div style="text-align: center; margin-bottom: 20px;">
   <img src="/images/NFL.png" alt="League Logo" style="max-height: 120px;">
 </div>
+<h1>National Foodball League</h1>
+<h1>Schedule</h1>
 
-<h1>National Foodball League Schedule</h1>
+<div style="text-align: center; margin-bottom: 40px;">
+  <a href="/" class="direct-button">📊 View Standings</a>
+</div>
 
 <div th:each="weekEntry : ${groupedSchedule}">
-  <h2>week <span th:text="${weekEntry.key}">X</span></h2>
+    <div class="table-name" th:text="'Week ' + ${weekEntry.key}">X</div>
 
   <div th:each="dayEntry : ${weekEntry.value}" class="day-schedule">
-    <h3>🍽️ <span th:text="${dayEntry.key}">יום</span></h3>
+    <div class="table-header" th:text="'🍽️ ' + ${dayEntry.key}" style="text-align: left">יום</div>
 
     <ul>
       <li th:each="game : ${dayEntry.value}">
